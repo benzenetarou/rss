@@ -1,1 +1,4 @@
 this is feed index
+<% @feed.entries.each do |entry| %>
+<p><%= entry.title %></p>
+<% end %>
