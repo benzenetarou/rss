@@ -1,6 +1,12 @@
 this is feed index
-<% @feed.each do |website| %>
+<!-- <% @feed.each do |website| %>
   <% website.entries.each do |entry| %>
     <p><%= link_to entry.title, entry.url %><%= entry.published %></p>
   <% end %>
-<% end %>
+<% end %> -->
+<div class="entry">
+  <% @entries.each do |entry| %>
+    <p><%= link_to entry.title, entry.url %></p>
+    <p><%= entry.published.strftime("%Y年%m月%d日 %H時%M分") %></p>
+  <% end %>
+</div>
