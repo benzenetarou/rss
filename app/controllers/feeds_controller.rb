@@ -3,7 +3,6 @@ class FeedsController < ApplicationController
   def index
     update_database
     @entries = Entry.all.order("published DESC")
-    render 'index'
   end
 
   def new
@@ -19,11 +18,14 @@ class FeedsController < ApplicationController
   end
 
   def create
-    @feed = Feed.new
-    @feed.title = params[:title]
-    @feed.url = params[:url]
-    @feed.save
+    if Feed.find_by(url: params[:url]).nil?
+      @feed = Feed.new
+      @feed.title = params[:title]
+      @feed.url = params[:url]
+      @feed.save
+    end
     index
+    redirect_to :root
   end
 
   def show
