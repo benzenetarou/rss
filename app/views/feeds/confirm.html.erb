@@ -1,0 +1,8 @@
+<p><%= @Feed_to_add.title %></p>
+<p>このサイトを購読しますか？</p>
+<%= form_tag("/feeds/create") do %>
+  <%= hidden_field_tag :title, value= "#{@Feed_to_add.title}"%>
+  <%= hidden_field_tag :url, value = "#{@url}"%>
+
+  <%= submit_tag "登録する" %>
+<% end %>

@@ -1,9 +1,4 @@
 this is feed index
-<!-- <% @feed.each do |website| %>
-  <% website.entries.each do |entry| %>
-    <p><%= link_to entry.title, entry.url %><%= entry.published %></p>
-  <% end %>
-<% end %> -->
 <div class="entry">
   <% @entries.each do |entry| %>
     <p><%= link_to entry.title, entry.url %></p>
