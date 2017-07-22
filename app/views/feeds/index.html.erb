@@ -1,4 +1,6 @@
 this is feed index
-<% @feed.entries.each do |entry| %>
-<p><%= entry.title %></p>
+<% @feed.each do |website| %>
+  <% website.entries.each do |entry| %>
+    <p><%= link_to entry.title, entry.url %><%= entry.published %></p>
+  <% end %>
 <% end %>
