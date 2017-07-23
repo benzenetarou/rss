@@ -24,7 +24,10 @@ class FeedsController < ApplicationController
       @feed.url = params[:url]
       @feed.rss_url = params[:rss_url]
       @feed.save
+    else
+      @feed = Feed.find_by(url: params[:url])
     end
+    current_user.register_feed(@feed)
     index
     redirect_to :root
   end

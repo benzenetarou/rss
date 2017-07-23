@@ -4,5 +4,10 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
   has_many :feeds, through: :user_feeds
-  has_many :user_feeds, class_name: "UserFeed", foreign_key: "user_id"
+  has_many :user_feeds
+
+  def register_feed(feed)
+    user_feeds.create(feed_id: feed.id)
+  end
+  
 end
