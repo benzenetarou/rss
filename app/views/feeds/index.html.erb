@@ -1,7 +1,6 @@
 this is feed index
 <div class="entry">
   <% @entries.each do |entry| %>
-    <p><%= link_to entry.title, entry.url %></p>
-    <p><%= entry.published.strftime("%Y年%m月%d日 %H時%M分") %></p>
+    <p><%= entry.feed.title %>  <%= link_to entry.title, entry.url %>  <%= entry.published.strftime("%Y年%m月%d日 %H時%M分") %></p>
   <% end %>
 </div>

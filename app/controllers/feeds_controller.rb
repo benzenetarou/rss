@@ -22,6 +22,7 @@ class FeedsController < ApplicationController
       @feed = Feed.new
       @feed.title = params[:title]
       @feed.url = params[:url]
+      @feed.rss_url = params[:rss_url]
       @feed.save
     end
     index
@@ -33,26 +34,27 @@ class FeedsController < ApplicationController
 
   private
     def parse_rss
-      make_array
+      make_feed_list
       @rss = []
       @feed_list.each do |feed|
-        @rss.push(Feedjira::Feed.fetch_and_parse(feed.url))
+        @rss.push(Feedjira::Feed.fetch_and_parse(feed.rss_url))
       end
     end
 
-    def make_array
+    def make_feed_list
       @feed_list = Feed.all
     end
 
     def update_database
         parse_rss
-        @new_feed = Feed.new(title: "test", url:"http://jp.techcrunch.com/feed/")
         @rss.each do |website|
-
-          website.entries.each do |entry|
-            @new_entry = Entry.new()
-            if Entry.find_by(url: entry.url).nil?
-            @new_entry.update_attributes(feed_id: 2, title: entry.title, url: entry.url, published: entry.published)
+          @feed = Feed.find_by(url: website.url)
+          website.entries.each do |article|
+            # debugger
+            @new_entry = @feed.entry.build(title: article.title, url: article.url, published: article.published)
+            if Entry.find_by(url: article.url).nil?
+              @new_entry.save
+              # @new_entry.update_attributes(title: entry.title, url: entry.url, published: entry.published)
             end
           end
         end
