@@ -35,14 +35,15 @@ gem 'jbuilder', '~> 2.5'
 
 gem 'feedjira'
 gem 'devise'
-gem 'pry-rails'
-gem 'pry-doc'
+
 
 group :development, :test do
   # Use sqlite3 as the database for Active Record
   gem 'sqlite3'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
+  gem 'pry-rails'
+  gem 'pry-doc'
 end
 
 group :development do
