@@ -9,5 +9,4 @@ class User < ApplicationRecord
   def register_feed(feed)
     user_feeds.create(feed_id: feed.id)
   end
-  
 end
