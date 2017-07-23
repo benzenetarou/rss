@@ -1,2 +1,8 @@
-<%= link_to "新規登録", feeds_new_path %>
-<%= link_to "登録一覧", feeds_list_path %>
+<%= link_to "HOME", root_path %>
+<%= link_to "feed登録", feeds_new_path %>
+<%= link_to "購読一覧", feeds_list_path %>
+<% if current_user.nil? %>
+  <%= link_to "ログイン", new_user_session_path %>
+<% else %>
+  <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+<% end %>
