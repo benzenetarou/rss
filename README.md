@@ -5,20 +5,9 @@ application up and running.
 
 Things you may want to cover:
 
-* Ruby version
+* Ruby version: 2.4.1
+* Rails version: 5.0.4
 
-* System dependencies
+use `bundle install --without production --path vendor/bundle`
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+visit `localhost:3000/users/sign_up` and sign up user then you can use this.
