@@ -1,0 +1,2 @@
+class UserFeed < ApplicationRecord
+end
