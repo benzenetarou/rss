@@ -3,7 +3,7 @@ class CreateFeeds < ActiveRecord::Migration[5.0]
     create_table :feeds do |t|
       t.string :title
       t.string :url
-      t.integer :feed_id
+      t.string :rss_url
 
       t.timestamps
     end

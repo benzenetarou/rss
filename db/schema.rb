@@ -13,21 +13,22 @@
 ActiveRecord::Schema.define(version: 20170723082741) do
 
   create_table "entries", force: :cascade do |t|
-    t.integer  "feed_id"
     t.string   "title"
     t.datetime "published"
     t.string   "url"
     t.text     "content"
+    t.integer  "feed_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["feed_id"], name: "index_entries_on_feed_id"
   end
 
   create_table "feeds", force: :cascade do |t|
     t.string   "title"
     t.string   "url"
+    t.string   "rss_url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string   "rss_url"
   end
 
   create_table "user_feeds", force: :cascade do |t|
