@@ -32,6 +32,10 @@ class FeedsController < ApplicationController
   def show
   end
 
+  def list
+    @feeds = Feed.all
+  end
+
   private
     def parse_rss
       make_feed_list
