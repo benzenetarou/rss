@@ -2,7 +2,7 @@ class FeedsController < ApplicationController
 
   def index
     update_database
-    @entries = Entry.all.order("published DESC")
+      @entries = Entry.where(feed: current_user.feeds.ids).order("published DESC")
   end
 
   def new
@@ -36,7 +36,7 @@ class FeedsController < ApplicationController
   end
 
   def list
-    @feeds = Feed.all
+    @feeds = current_user.feeds
   end
 
   private
