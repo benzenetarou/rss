@@ -3,7 +3,7 @@
 </div>
 <% @feeds.each do |feed| %>
   <div class="">
-    <%= feed.title %><%= link_to "購読をやめる", delete_user_feed_path(id: feed.id), method: :delete,
+    <%= feed.title %><%= link_to "購読をやめる", feed, method: :delete,
                                   data: { confirm: "本当に解除しますか?" } %>
   </div>
 <% end %>
