@@ -34,6 +34,11 @@ class FeedsController < ApplicationController
   def show
   end
 
+  def destroy
+    current_user.user_feeds.where(feed_id: params[:id]).delete_all
+    redirect_to feeds_list_path
+  end
+
   def list
     @feeds = current_user.feeds
   end
