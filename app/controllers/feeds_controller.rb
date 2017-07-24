@@ -11,7 +11,12 @@ class FeedsController < ApplicationController
 
   def confirm
     @url = params[:url]
-    @Feed_to_add = Feedjira::Feed.fetch_and_parse(@url)
+    begin
+      @Feed_to_add = Feedjira::Feed.fetch_and_parse(@url)
+    rescue => e
+      flash[:danger] = "このURLは対応していません"
+      return redirect_to feeds_new_path
+    end
     @feed = Feed.new
     render 'confirm'
   end
