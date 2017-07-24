@@ -1,8 +1,8 @@
 class FeedsController < ApplicationController
-
+  before_action :logged_in?, only: [:index, :new, :confirm, :create, :list]
   def index
     update_database
-      @entries = Entry.where(feed: current_user.feeds.ids).order("published DESC")
+    @entries = Entry.where(feed: current_user.feeds.ids).order("published DESC")
   end
 
   def new
@@ -13,7 +13,6 @@ class FeedsController < ApplicationController
     @url = params[:url]
     @Feed_to_add = Feedjira::Feed.fetch_and_parse(@url)
     @feed = Feed.new
-    flash[:success] = "確認します"
     render 'confirm'
   end
 
@@ -57,11 +56,9 @@ class FeedsController < ApplicationController
         @rss.each do |website|
           @feed = Feed.find_by(url: website.url)
           website.entries.each do |article|
-            # debugger
             @new_entry = @feed.entry.build(title: article.title, url: article.url, published: article.published)
             if Entry.find_by(url: article.url).nil?
               @new_entry.save
-              # @new_entry.update_attributes(title: entry.title, url: entry.url, published: entry.published)
             end
           end
         end

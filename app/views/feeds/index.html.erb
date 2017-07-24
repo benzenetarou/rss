@@ -6,4 +6,8 @@ this is feed index
       <p><%= entry.feed.title %>  <%= link_to entry.title, entry.url %>  <%= entry.published.strftime("%Y年%m月%d日 %H時%M分") %></p>
     <% end %>
   </div>
+<% else %>
+  <div class="">
+    ログインしてください
+  </div>
 <% end %>
