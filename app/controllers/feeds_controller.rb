@@ -12,28 +12,24 @@ class FeedsController < ApplicationController
   def confirm
     @url = params[:url]
     begin
-      @Feed_to_add = Feedjira::Feed.fetch_and_parse(@url)
+      @parsed_feed = Feedjira::Feed.fetch_and_parse(@url)
     rescue => e
       flash[:danger] = "このURLは対応していません"
       return redirect_to feeds_new_path
     end
     @feed = Feed.new
-    render 'confirm'
   end
 
   def create
+    # debugger
     if Feed.find_by(url: params[:url]).nil?
-      @feed = Feed.new
-      @feed.title = params[:title]
-      @feed.url = params[:url]
-      @feed.rss_url = params[:rss_url]
+      @feed = Feed.new(feed_params)
       @feed.save
     else
-      @feed = Feed.find_by(url: params[:url])
+      @feed = Feed.find_by(url: params[:feed][:url])
     end
     current_user.register_feed(@feed)
-    index
-    redirect_to :root
+    redirect_to feeds_list_path
   end
 
   def show
@@ -49,6 +45,10 @@ class FeedsController < ApplicationController
   end
 
   private
+
+    def feed_params
+      params.require(:feed).permit(:title, :url, :rss_url)
+    end
     def parse_rss
       @feed_list = Feed.all
       @feed_list.map{|feed|
