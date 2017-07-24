@@ -40,19 +40,13 @@ class FeedsController < ApplicationController
 
   private
     def parse_rss
-      make_feed_list
-      @rss = []
-      @feed_list.each do |feed|
-        @rss.push(Feedjira::Feed.fetch_and_parse(feed.rss_url))
-      end
-    end
-
-    def make_feed_list
       @feed_list = Feed.all
+      @feed_list.map{|feed|
+        Feedjira::Feed.fetch_and_parse(feed.rss_url)}
     end
 
     def update_database
-        parse_rss
+        @rss = parse_rss
         @rss.each do |website|
           @feed = Feed.find_by(url: website.url)
           website.entries.each do |article|
