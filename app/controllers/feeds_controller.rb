@@ -21,7 +21,6 @@ class FeedsController < ApplicationController
   end
 
   def create
-    # debugger
     if Feed.find_by(url: params[:url]).nil?
       @feed = Feed.new(feed_params)
       @feed.save
