@@ -8,6 +8,16 @@ Things you may want to cover:
 * Ruby version: 2.4.1
 * Rails version: 5.0.4
 
-use `bundle install --without production --path vendor/bundle`
+Installation
+---
 
-visit `localhost:3000/users/sign_up` and sign up user then you can use this.
+`$ bundle install --without production --path vendor/bundle`
+
+`$ bundle exec rails db:migrate`
+
+
+How to run on local
+---
+
+1. Open terminal & `rails server`
+2. Open `http://localhost:3000/` on your browser
